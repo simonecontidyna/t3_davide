@@ -1,168 +1,115 @@
 # Tic Tac Toe
 
-A simple, elegant React-based Tic Tac Toe game built with modern web technologies.
+A simple, elegant React-based Tic Tac Toe game built with Vite and modern web technologies.
 
-![Tic Tac Toe](https://img.shields.io/badge/React-18.2.0-blue)
+![Tic Tac Toe](https://img.shields.io/badge/React-18.3.1-blue)
+![Vite](https://img.shields.io/badge/Vite-8.0-purple)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## Features
 
-- 🎮 **Classic Gameplay**: Enjoy the traditional 3x3 Tic Tac Toe experience
-- 🎨 **Modern UI**: Beautiful gradient background with clean, responsive design
-- ⚡ **Instant Feedback**: Real-time game status updates
-- 🔄 **Easy Reset**: Quick game reset to start fresh
-- 📱 **Responsive**: Works seamlessly on desktop and mobile devices
-
-## Demo
-
-The game features:
-- Two-player local gameplay (X and O)
-- Automatic win detection
-- Turn indicator showing whose move it is
-- Winner announcement
-- Reset button to start a new game
+- Classic two-player gameplay (X and O)
+- Automatic win and draw detection
+- Modern UI with gradient background and responsive design
+- Accessible: ARIA labels, keyboard navigation, visible focus indicators
+- Production security headers and Content Security Policy
 
 ## Installation
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
-- npm or yarn package manager
+- Node.js (v18 or higher)
+- npm
 
 ### Steps
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd tic-tac-toe
+git clone https://github.com/simonecontidyna/t3_davide.git
+cd t3_davide
 ```
 
-2. Install dependencies:
+2. Install dependencies (use `ci` for reproducible builds):
 ```bash
-npm install
+npm ci
 ```
 
 3. Start the development server:
 ```bash
-npm start
+npm run dev
 ```
 
-The application will open automatically in your browser at [http://localhost:3000](http://localhost:3000)
+The application will open automatically at [http://localhost:3000](http://localhost:3000)
 
 ## Usage
 
-### How to Play
-
 1. The game starts with Player X's turn
-2. Click on any empty square to place your mark (X or O)
+2. Click on any empty square to place your mark
 3. Players alternate turns
-4. The first player to get three of their marks in a row (horizontally, vertically, or diagonally) wins
-5. If all squares are filled with no winner, the game ends in a draw
-6. Click "Reset Game" to start a new game at any time
+4. First player to get three in a row (horizontal, vertical, or diagonal) wins
+5. If all squares are filled with no winner, the game is a draw
+6. Click "Reset Game" to start over
 
-### Game Controls
+## Available Scripts
 
-- **Click on squares**: Place your mark
-- **Reset Game button**: Start a new game
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start the development server |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview the production build |
 
 ## Project Structure
 
 ```
-tic-tac-toe/
+t3_davide/
+├── index.html              # HTML entry point with CSP meta tags
+├── vite.config.js          # Vite configuration
+├── package.json            # Dependencies (pinned versions)
 ├── public/
-│   └── index.html          # HTML template
+│   └── _headers            # Production security headers (Netlify/Cloudflare)
 ├── src/
-│   ├── App.js             # Main game component and logic
-│   ├── App.css            # Component-specific styles
-│   ├── index.js           # React entry point
-│   └── index.css          # Global styles
-├── package.json           # Project dependencies and scripts
-└── README.md             # This file
+│   ├── App.jsx             # Game components and logic
+│   ├── App.css             # Component styles
+│   ├── index.jsx           # React entry point
+│   └── index.css           # Global styles
+├── LICENSE
+└── README.md
 ```
 
-## Technical Details
+## Security
 
-### Technologies Used
+### Content Security Policy
 
-- **React 18.2.0**: UI library for building the game interface
-- **React DOM 18.2.0**: React rendering for web browsers
-- **React Scripts 5.0.1**: Build tooling and development server
+The application includes a strict CSP via a `<meta>` tag in `index.html` that restricts resource loading to same-origin only. This prevents XSS and data injection attacks.
 
-### Key Components
+### Production Security Headers
 
-- **App**: Main application component that wraps the game
-- **Board**: Game board component managing game state and logic
-- **Square**: Individual square component for the game grid
+The `public/_headers` file provides additional HTTP security headers for deployment platforms that support it (Netlify, Cloudflare Pages):
 
-### Game Logic
+| Header | Value | Purpose |
+|--------|-------|---------|
+| `X-Content-Type-Options` | `nosniff` | Prevents MIME-type sniffing |
+| `X-Frame-Options` | `DENY` | Prevents clickjacking |
+| `Referrer-Policy` | `strict-origin-when-cross-origin` | Controls referrer information |
+| `Permissions-Policy` | `camera=(), microphone=(), ...` | Disables unnecessary browser APIs |
+| `X-XSS-Protection` | `0` | Disables legacy XSS filter (CSP is preferred) |
 
-The game uses React hooks for state management:
-- `useState` for tracking the board state (array of 9 squares)
-- `useState` for tracking the current player (X or O)
-- Win detection algorithm checking all 8 possible winning combinations
+### Dependency Management
 
-### Win Detection
+- All dependency versions are **pinned exactly** (no caret or tilde ranges)
+- Use `npm ci` instead of `npm install` for reproducible builds
+- The project uses only 23 total packages (vs 1300+ with Create React App)
 
-The game checks for winners by evaluating these patterns:
-- 3 horizontal rows
-- 3 vertical columns
-- 2 diagonal lines
+### Environment Variables
 
-## Available Scripts
+All `.env` files are git-ignored by default. Use `.env.example` to document required variables without exposing real values.
 
-In the project directory, you can run:
+## Accessibility
 
-### `npm start`
-
-Runs the app in development mode.
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in interactive watch mode.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.
-Your app is ready to be deployed!
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-## Customization
-
-### Changing Colors
-
-Edit `src/App.css` to customize:
-- Background gradient (`.App` class)
-- Square colors (`.square` class)
-- Button colors (`.reset-button` class)
-
-### Adjusting Board Size
-
-To create a larger board, modify:
-- The array size in `useState(Array(9).fill(null))`
-- The winning combinations in `calculateWinner` function
-- The grid layout in the render method
-
-### Adding Features
-
-Potential enhancements:
-- Player name input
-- Score tracking
-- Sound effects
-- AI opponent
-- Game history
-- Different difficulty levels
+- All game squares have descriptive `aria-label` attributes (e.g. "Square top-left, marked X")
+- Game status uses `aria-live="polite"` for screen reader announcements
+- Visible focus indicators on all interactive elements (WCAG compliant)
+- Semantic HTML with `role` attributes for the game grid
 
 ## Browser Support
 
@@ -173,26 +120,4 @@ Potential enhancements:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Acknowledgments
-
-- Built following the official React tutorial
-- Inspired by classic Tic Tac Toe gameplay
-- Created as a demonstration of React state management
-
-## Author
-
-Created with ❤️ using React
-
-## Support
-
-For issues, questions, or suggestions, please open an issue on the repository.
-
----
-
-Enjoy playing Tic Tac Toe! 🎮
+MIT - see [LICENSE](LICENSE).

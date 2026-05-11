@@ -97,7 +97,8 @@
 }
 
 .square:focus {
-  outline: none;
+  outline: 3px solid #667eea;
+  outline-offset: -3px;
   background: #d0d0d0;
 }
 
@@ -119,6 +120,7 @@
 }
 
 .reset-button:focus {
-  outline: none;
+  outline: 3px solid #333;
+  outline-offset: 2px;
   background: #5568d3;
 }
