@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Exec(mkdir public)",
+      "Exec(mkdir src)",
+      "Exec(git add)"
+    ]
+  }
+}
