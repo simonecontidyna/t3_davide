@@ -3,7 +3,17 @@
     "allow": [
       "Exec(mkdir public)",
       "Exec(mkdir src)",
-      "Exec(git add)"
+      "Exec(git add)",
+      "Exec(npm show)",
+      "Exec(cat)",
+      "Exec(git push)",
+      "Exec(npm uninstall)",
+      "Exec(mv)",
+      "Exec(rm)",
+      "Exec(npm ls)",
+      "Exec(npm run)",
+      "Exec(git rm)",
+      "Exec(git diff)"
     ]
   }
 }
